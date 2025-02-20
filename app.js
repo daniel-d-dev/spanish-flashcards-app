@@ -9,51 +9,46 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-const categories = {
-    food: [
-        { english: "Apple", spanish: "Manzana" },
-        { english: "Bread", spanish: "Pan" },
-        { english: "Cheese", spanish: "Queso" }
-    ],
-    bodyParts: [
-        { english: "Head", spanish: "Cabeza" },
-        { english: "Hand", spanish: "Mano" },
-        { english: "Leg", spanish: "Pierna" }
-    ],
-    common: [
-        { english: "Dog", spanish: "Perro" },
-        { english: "House", spanish: "Casa" },
-        { english: "Car", spanish: "Coche" }
-    ]
-};
+async function loadCategory(category) {
+    try {
+        const response = await fetch("words.json");
+        const categories = await response.json();
+        const words = categories[category];
 
-function loadCategory(category) {
-    const container = document.getElementById("flashcards");
-    container.innerHTML = "";
+        if (!words) {
+            console.error("Category not found.");
+            return;
+        }
 
-    categories[category].forEach(word => {
-        const card = document.createElement("div");
-        card.classList.add("card");
+        const container = document.getElementById("flashcards");
+        container.innerHTML = "";
 
-        const front = document.createElement("div");
-        front.classList.add("front");
-        front.textContent = word.english;
+        words.forEach(word => {
+            const card = document.createElement("div");
+            card.classList.add("card");
 
-        const back = document.createElement("div");
-        back.classList.add("back");
-        back.textContent = word.spanish;
+            const front = document.createElement("div");
+            front.classList.add("front");
+            front.textContent = word.english;
 
-        const icon = document.createElement("i");
-        icon.classList.add("fas", "fa-sync-alt", "flip-icon");
-        card.appendChild(icon);
+            const back = document.createElement("div");
+            back.classList.add("back");
+            back.textContent = word.spanish;
 
-        card.appendChild(front);
-        card.appendChild(back);
+            const icon = document.createElement("i");
+            icon.classList.add("fas", "fa-sync-alt", "flip-icon");
+            card.appendChild(icon);
 
-        card.addEventListener("click", () => {
-            card.classList.toggle("flipped");
+            card.appendChild(front);
+            card.appendChild(back);
+
+            card.addEventListener("click", () => {
+                card.classList.toggle("flipped");
+            });
+
+            container.appendChild(card);
         });
-
-        container.appendChild(card);
-    });
+    } catch (error) {
+        console.error("Failed to load data.", error);
+    }
 }
