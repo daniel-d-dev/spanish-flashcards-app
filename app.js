@@ -34,11 +34,20 @@ function loadCategory(category) {
     categories[category].forEach(word => {
         const card = document.createElement("div");
         card.classList.add("card");
-        card.textContent = word.english;
+
+        const front = document.createElement("div");
+        front.classList.add("front");
+        front.textContent = word.english;
+
+        const back = document.createElement("div");
+        back.classList.add("back");
+        back.textContent = word.spanish;
+
+        card.appendChild(front);
+        card.appendChild(back);
 
         card.addEventListener("click", () => {
             card.classList.toggle("flipped");
-            card.textContent = card.classList.contains("flipped") ? word.spanish : word.english;
         });
 
         container.appendChild(card);
