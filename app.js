@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const categoryButtons = document.querySelectorAll(".categories button");
+    const categoryButtons = document.querySelectorAll(".btn-primary");
 
     categoryButtons.forEach(button => {
         button.addEventListener("click", () => {
@@ -24,8 +24,15 @@ async function loadCategory(category) {
         container.innerHTML = "";
 
         words.forEach(word => {
+            const col = document.createElement("div");
+            col.classList.add("col-lg-3", "col-md-4", "col-sm-6", "d-flex", "justify-content-center");
+
             const card = document.createElement("div");
-            card.classList.add("card");
+            card.classList.add("card", "p-5", "shadow-sm");
+
+            if (word.english.length > 10 || word.spanish.length > 10) {
+                card.classList.add("small-text");
+            }
 
             const front = document.createElement("div");
             front.classList.add("front");
@@ -46,7 +53,8 @@ async function loadCategory(category) {
                 card.classList.toggle("flipped");
             });
 
-            container.appendChild(card);
+            col.appendChild(card);
+            container.appendChild(col);
         });
     } catch (error) {
         console.error("Failed to load data.", error);
