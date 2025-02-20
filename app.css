@@ -37,7 +37,7 @@ button:hover {
 .card {
     position: relative;
     width: 150px;
-    aspect-ratio: 1/1;
+    height: 150px;
     background-color: white;
     border: 2px solid #333;
     display: flex;
@@ -49,30 +49,15 @@ button:hover {
     text-align: center;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* transition: box-shadow 0.3s ease; */
-    transition: transform 0.5s ease;
-    perspective: 1000px;
+    transition: box-shadow 0.3s ease;
 }
 
-.card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.5s ease;
-}
-
-.card.flipped .card-inner {
-    transform: rotateY(180deg);
-}
-
-
-/* .card:hover {
+.card:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-} */
+}
 
-.card-front,
-.card-back {
+.front,
+.back {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -80,14 +65,10 @@ button:hover {
     align-items: center;
     justify-content: center;
     backface-visibility: hidden;
-    border-radius: 5px;
-    border: 2px solid #333;
-    background: white;
-    padding: 10px;
     transition: transform 0.5s ease;
 }
 
-.card-back {
+.back {
     transform: rotateY(180deg);
 }
 
@@ -95,9 +76,9 @@ button:hover {
     transform: rotateY(180deg);
 }
 
-/* .card.flipped .back {
+.card.flipped .back {
     transform: rotateY(360deg);
-} */
+}
 
 .flip-icon {
     position: absolute;
