@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const categoryButtons = document.querySelectorAll(".categories button");
+    const categoryButtons = document.querySelectorAll("[data-category]");
 
     categoryButtons.forEach(button => {
         button.addEventListener("click", () => {
@@ -24,29 +24,36 @@ async function loadCategory(category) {
         container.innerHTML = "";
 
         words.forEach(word => {
+            const col = document.createElement("div");
+            col.classList.add("col");
+
             const card = document.createElement("div");
             card.classList.add("card");
 
-            const front = document.createElement("div");
-            front.classList.add("front");
-            front.textContent = word.english;
+            const cardInner = document.createElement("div");
+            cardInner.classList.add("card-inner");
 
-            const back = document.createElement("div");
-            back.classList.add("back");
-            back.textContent = word.spanish;
+            const cardFront = document.createElement("div");
+            cardFront.classList.add("card-front", "p-3", "d-flex", "align-items-center", "justify-content-center");
+            cardFront.textContent = word.english;
 
-            const icon = document.createElement("i");
-            icon.classList.add("fas", "fa-sync-alt", "flip-icon");
-            card.appendChild(icon);
+            const cardBack = document.createElement("div");
+            cardBack.classList.add("card-back", "p-3", "d-flex", "align-items-center", "justify-content-center", "bg-warning");
+            cardBack.textContent = word.spanish;
 
-            card.appendChild(front);
-            card.appendChild(back);
+            // const icon = document.createElement("i");
+            // icon.classList.add("fas", "fa-sync-alt", "flip-icon");
+            // card.appendChild(icon);
+
+            cardInner.appendChild(cardFront);
+            cardInner.appendChild(cardBack);
+            card.appendChild(cardInner);
+            col.appendChild(card);
+            container.appendChild(col);
 
             card.addEventListener("click", () => {
                 card.classList.toggle("flipped");
             });
-
-            container.appendChild(card);
         });
     } catch (error) {
         console.error("Failed to load data.", error);
