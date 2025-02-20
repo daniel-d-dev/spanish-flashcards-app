@@ -42,9 +42,20 @@ async function loadCategory(category) {
             back.classList.add("back");
             back.textContent = word.spanish;
 
+            const englishEmoji = document.createElement("span");
+            englishEmoji.classList.add("language-emoji");
+            englishEmoji.textContent = "🇬🇧";
+
+            const spanishEmoji = document.createElement("span");
+            spanishEmoji.classList.add("language-emoji");
+            spanishEmoji.textContent = "🇪🇸";
+
             const icon = document.createElement("i");
             icon.classList.add("fas", "fa-sync-alt", "flip-icon");
             card.appendChild(icon);
+
+            front.appendChild(englishEmoji);
+            back.appendChild(spanishEmoji);
 
             card.appendChild(front);
             card.appendChild(back);
