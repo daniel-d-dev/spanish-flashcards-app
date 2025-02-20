@@ -43,6 +43,10 @@ function loadCategory(category) {
         back.classList.add("back");
         back.textContent = word.spanish;
 
+        const icon = document.createElement("i");
+        icon.classList.add("fas", "fa-sync-alt", "flip-icon");
+        card.appendChild(icon);
+
         card.appendChild(front);
         card.appendChild(back);
 
